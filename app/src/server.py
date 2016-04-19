@@ -1,21 +1,22 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask.ext.redis import FlaskRedis
 
 app = Flask(__name__)
-app.config.update(
-    REDIS_URL="redis://redis:6379/0"
-)
-
-redis_store = FlaskRedis(app)
-
 
 @app.route('/')
 def index():
-    addr = request.remote_addr
-    redis_store.incr(addr)
-    visits = redis_store.get(addr)
-
-    return jsonify({
-        'ip': addr,
-        'visits': visits,
-    })
+    user = { 'username': 'John' }
+    posts = [
+        { 
+            'author': { 'username': 'John' }, 
+            'body': 'Beautiful day in Portland!' 
+        },
+        { 
+            'author': { 'username': 'Susan' }, 
+            'body': 'The Avengers movie was so cool!' 
+        }
+    ]
+    return render_template("index.html",
+        title = 'Home',
+        user = user,
+        posts = posts)

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>{% if title %}{{title}} - {% endif %}Python Based Blog</title>
+ 
+ 
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+ 
+ 
+</head>
+ 
+<body>
+ 
+    <div class="container">
+        <div class="header">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    {% if user %}
+                        <li role="presentation">Hello, {{user.username}}</li>
+                        <li role="presentation"><a href="#">Log Out</a></li>
+                    {% else %}
+                        <li role="presentation"><a href="#">Sign In</a></li>
+                        <li role="presentation"><a href="showSignUp">Sign Up</a>
+                    {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <h3 class="text-muted">Blog</h3>
+        </div>
+
+        <h1>{% if title %}{{title}}{% else %}Blog app{% endif %}</h1>
+
+        {% block content %}
+        {% endblock %}
+ 
+        <footer class="footer">
+            <p>&copy; Company 2016</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>
