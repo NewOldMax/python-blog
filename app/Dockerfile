@@ -6,6 +6,8 @@ COPY wheelhouse /wheelhouse
 RUN pip install --no-index --find-links wheelhouse \
     flask \
     flask-redis \
+    WTForms \
+    Flask-WTF \
     uwsgi
 
 COPY src /app

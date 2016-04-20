@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, render_template, redirect, flash
 from flask.ext.redis import FlaskRedis
+from forms import LoginForm
 
 app = Flask(__name__)
 
@@ -20,3 +21,10 @@ def index():
         title = 'Home',
         user = user,
         posts = posts)
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+    form = LoginForm()
+    return render_template('login.html', 
+        title = 'Sign In',
+        form = form)
