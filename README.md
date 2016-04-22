@@ -13,5 +13,5 @@ user@host $ docker-compose build
 user@host $ docker-compose up
 ```
 
-And head over `http://localhost:1337` and you should see an IP address.
+And head over `http://localhost` and you should see the app.
 
