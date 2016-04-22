@@ -8,6 +8,7 @@ RUN pip install --no-index --find-links wheelhouse \
     flask-redis \
     WTForms \
     Flask-WTF \
+    six \
     uwsgi
 
 COPY src /app

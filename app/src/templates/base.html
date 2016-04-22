@@ -18,14 +18,15 @@
         <div class="header">
             <nav>
                 <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
+                    <li role="presentation" {% if request.url_rule.rule == '/' %} class="active"{% endif %}><a href="{{url_for('index')}}">Home</a></li>
                     {% if user %}
-                        <li role="presentation">Hello, {{user.username}}</li>
+                        <li role="presentation"><a href="#">Hello, {{user.username}}</a></li>
                         <li role="presentation"><a href="#">Log Out</a></li>
                     {% else %}
-                        <li role="presentation"><a href="#">Sign In</a></li>
-                        <li role="presentation"><a href="showSignUp">Sign Up</a>
+                        <li role="presentation" {% if '/login' in request.url_rule.rule %} class="active"{% endif %}><a href="{{url_for('login')}}">Sign In</a></li>
+                        <li role="presentation" {% if '/register' in request.url_rule.rule %} class="active"{% endif %}><a href="{{url_for('register')}}">Sign Up</a>
                     {% endif %}
+                        <li role="presentation" {% if '/post' in request.url_rule.rule %} class="active"{% endif %}><a href="{{url_for('post')}}">Create post</a>
                     </li>
                 </ul>
             </nav>
@@ -33,6 +34,16 @@
         </div>
 
         <h1>{% if title %}{{title}}{% else %}Blog app{% endif %}</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alerts">
+                    {% for message in messages %}
+                        <div class="alert alert-warning" role="alert">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
         {% block content %}
         {% endblock %}

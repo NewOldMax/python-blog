@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="post" name="login" class="form">
+    {{ form.hidden_tag() }}
+    {% for field in form if field.widget.input_type != 'hidden' %}
+        <p>
+            <div class="form-label">
+                {{ field.label }}                
+            </div>
+            <div class="form-group text-left">
+                {% if field.widget.input_type != 'checkbox' %}
+                    {{ field(class='form-control') }}
+                {% else %}
+                    {{ field(class='checkbox') }}
+                {% endif %}
+            </div>
+                {% for error in field.errors %}
+                    <p style="color: red;">[{{error}}]</p>
+                {% endfor %}
+        </p>
+    {% endfor %}
+    <p><input type="submit" value="{{title}}"></p>
+</form>
+{% endblock %}
